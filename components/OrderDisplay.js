@@ -15,7 +15,7 @@ const fetcher = (url, salesOrderNumber, environment) => (
 
 export default function OrderDisplay({salesOrderNumber, environment}) {
   const [salesOrderData, setSalesOrderData] = useState();
-
+  const [searchEnvironment, setSearchEnvironment] = useState('dev');
   const {data: salesOrder, error } = useSWR(
     ['/api/salesorder', salesOrderNumber, environment],
     (url, id, env) => fetcher(url, id, env),

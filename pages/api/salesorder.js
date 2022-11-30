@@ -60,9 +60,12 @@ export default async function handler(req, res) {
   }
 
   const {SaleOrderNumber} = req.query
+  let salesOrder = []
 
-  const saleID = await getSalesIDByOrderNumber(SaleOrderNumber)
-  const salesOrder = await getSalesOrder(saleID)
+  if (SaleOrderNumber) {
+    const saleID = await getSalesIDByOrderNumber(SaleOrderNumber)
+    salesOrder = await getSalesOrder(saleID)
+  }
   res.status(200)
   res.json(salesOrder)
 }
