@@ -1,8 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default async function handler(req, res) {
-  const accountId = process.env.DEAR_API_AUTH_ACCOUNT_ID
-  const applicationKey = process.env.DEAR_API_AUTH_APPLICATIONKEY
+  const {Environment} = req.query
+  const accountId = Environment == "dev" ? process.env.DEAR_DEV_API_AUTH_ACCOUNT_ID : process.env.DEAR_API_AUTH_ACCOUNT_ID
+  const applicationKey = Environment == "dev" ? process.env.DEAR_DEV_API_AUTH_APPLICATIONKEY : process.env.DEAR_API_AUTH_APPLICATIONKEY
 
   async function DearData(url, method) {
       const options = {

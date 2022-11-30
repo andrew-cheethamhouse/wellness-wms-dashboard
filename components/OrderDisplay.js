@@ -4,19 +4,21 @@ import axios from "axios"
 import { useEffect, useState } from 'react'
 import OrderNotFound from './OrderNotFound'
 
-const fetcher = (url, salesOrderNumber) => (
+const fetcher = (url, salesOrderNumber, environment) => (
   axios.get(url, {
       params: {
-        SaleOrderNumber: salesOrderNumber
+        SaleOrderNumber: salesOrderNumber,
+        Environment: environment
       }
   }).then((res) => res.data)
 )
 
-export default function OrderDisplay({salesOrderNumber}) {
+export default function OrderDisplay({salesOrderNumber, environment}) {
   const [salesOrderData, setSalesOrderData] = useState();
+
   const {data: salesOrder, error } = useSWR(
-    ['/api/salesorder', salesOrderNumber],
-    (url, id) => fetcher(url, id),
+    ['/api/salesorder', salesOrderNumber, environment],
+    (url, id, env) => fetcher(url, id, env),
     { errorRetryCount: 3 }
   )
 
