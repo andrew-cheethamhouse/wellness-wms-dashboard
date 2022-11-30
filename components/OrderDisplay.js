@@ -13,7 +13,6 @@ const fetcher = (url, salesOrderNumber) => (
 )
 
 export default function OrderDisplay({salesOrderNumber}) {
-  console.log("OrderDisplay: ", salesOrderNumber)
   const [salesOrderData, setSalesOrderData] = useState();
   const {data: salesOrder, error } = useSWR(
     ['/api/salesorder', salesOrderNumber],
