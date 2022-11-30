@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     const response = await DearData(url, "GET")
     if (typeof response.SaleList !== undefined && response.SaleList.length > 0) {
         const salesOrders = response.SaleList.filter(sale => {
-            return sale.CombinedPickingStatus == "PICKED" && sale.FulFilmentStatus == "NOT FULFILLED"
+            return sale.FulFilmentStatus == "NOT FULFILLED"
         })
         if (salesOrders.length > 0) {
             return salesOrders[0].SaleID
