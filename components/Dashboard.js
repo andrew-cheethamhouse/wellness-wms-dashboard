@@ -17,6 +17,8 @@ import { Disclosure, Switch } from '@headlessui/react'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import OrderDisplay from './OrderDisplay'
+import OrderListDisplay from './OrderListDisplay'
+
 
 const user = {
   name: 'Tom Cook',
@@ -46,12 +48,17 @@ export default function Dashboard() {
     setSalesOrderNumber(e.target.value)
   }
 
+  function setSalesOrderId(id) {
+    setSalesOrderNumber(id)
+  }
+
   const [searchEnvironment, setSearchEnvironment] = useState('dev');
 
   function toggleSearchEnvironment() {
     setSearchEnvironment(searchEnvironment == "dev" ? "production" : "dev")
-    console.log("searchEnvironment:", searchEnvironment)
   }
+
+  console.log("Dashboard salesOrderNumber:", salesOrderNumber)
 
   return (
     <>
@@ -196,9 +203,10 @@ export default function Dashboard() {
 
         <main className="-mt-32">
           <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-            {/* Replace with your content */}
             <OrderDisplay salesOrderNumber={salesOrderNumber} environment={searchEnvironment}></OrderDisplay>
-            {/* /End replace */}
+          </div>
+          <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+            <OrderListDisplay setSalesOrderId={setSalesOrderId} environment={searchEnvironment}></OrderListDisplay>
           </div>
         </main>
       </div>

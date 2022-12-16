@@ -4,21 +4,24 @@ import axios from "axios"
 import { useEffect, useState } from 'react'
 import OrderNotFound from './OrderNotFound'
 
-const fetcher = (url, salesOrderNumber, environment) => (
+const fetcher = (url, salesOrderNumber, environment, getList) => (
   axios.get(url, {
       params: {
         SaleOrderNumber: salesOrderNumber,
-        Environment: environment
+        Environment: environment,
+        FullList: getList
       }
   }).then((res) => res.data)
 )
 
 export default function OrderDisplay({salesOrderNumber, environment}) {
+  console.log("ORderDisplay salesOrderNumber", salesOrderNumber)
+  const [salesOrderId, setSalesOrderId] = useState();
   const [salesOrderData, setSalesOrderData] = useState();
   const [searchEnvironment, setSearchEnvironment] = useState('dev');
   const {data: salesOrder, error } = useSWR(
     ['/api/salesorder', salesOrderNumber, environment],
-    (url, id, env) => fetcher(url, id, env),
+    (url, id, env) => fetcher(url, id, env, false),
     { errorRetryCount: 3 }
   )
 
@@ -27,6 +30,9 @@ export default function OrderDisplay({salesOrderNumber, environment}) {
       setSalesOrderData(salesOrder);
     }
   }, [salesOrder]);
+
+  console.log("ORderDisplay salesOrder", salesOrder)
+
 
   if (error) {
     return <p>Failed to load.</p>;
