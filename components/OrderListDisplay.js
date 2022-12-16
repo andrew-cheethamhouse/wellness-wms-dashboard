@@ -44,11 +44,11 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
   }
 
   return (
-    <div className="px-4 pt-4 rounded-md sm:px-6 lg:px-8 bg-gray-200">
+    <div className="px-4 pt-4 rounded-lg sm:px-6 lg:px-8 bg-black">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Picked Orders</h1>
-          <p className="mt-2 text-sm text-gray-700">
+          <h1 className="text-xl font-semibold text-white">Picked Orders</h1>
+          <p className="mt-2 text-sm text-gray-200">
             A list of DEAR orders that are in a picked state.
           </p>
         </div>
@@ -151,7 +151,7 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
                           onClick={() => {
                             setSalesOrderId(order.ID);
                           }}
-                          className="text-indigo-600 hover:text-indigo-900"
+                          className="text-white bg-black px-4 py-2 rounded-lg"
                         >
                           View
                           <span className="sr-only">, {order.Customer}</span>
