@@ -89,9 +89,12 @@ export default async function handler(req, res) {
 
   const { SaleOrderNumber } = req.query;
   let salesOrder = [];
-
-  if (SaleOrderNumber || FullList == "true") {
-    if (SaleOrderNumber.length == 36) {
+  if (typeof SaleOrderNumber === undefined && FullList == "false") {
+      res.status(200);
+      res.json({ ErrorCode: 401, Exception: "Empty search" });
+  }
+  if ((typeof SaleOrderNumber !== undefined && SaleOrderNumber !== null && SaleOrderNumber !== "") ||  FullList == "true") {
+    if (SaleOrderNumber && SaleOrderNumber.length == 36) {
       salesOrder = await getSalesOrder(SaleOrderNumber);
       res.status(200);
       res.json(salesOrder);

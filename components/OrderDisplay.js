@@ -38,7 +38,11 @@ export default function OrderDisplay({salesOrderNumber, environment}) {
     return <p>Waiting for order...</p>;
   }
 
-  if (salesOrder.ErrorCode) {
+  if (salesOrder.ErrorCode == 401) {
+    return
+  }
+
+  if (salesOrder.ErrorCode == 400) {
     return <OrderNotFound message={salesOrder.Exception}></OrderNotFound>
   }
 
