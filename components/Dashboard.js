@@ -58,8 +58,6 @@ export default function Dashboard() {
     setSearchEnvironment(searchEnvironment == "dev" ? "production" : "dev")
   }
 
-  console.log("Dashboard salesOrderNumber:", salesOrderNumber)
-
   return (
     <>
       <div className="min-h-full">

@@ -15,7 +15,6 @@ const fetcher = (url, salesOrderNumber, environment, getList) => (
 )
 
 export default function OrderDisplay({salesOrderNumber, environment}) {
-  console.log("ORderDisplay salesOrderNumber", salesOrderNumber)
   const [salesOrderId, setSalesOrderId] = useState();
   const [salesOrderData, setSalesOrderData] = useState();
   const [searchEnvironment, setSearchEnvironment] = useState('dev');
@@ -30,9 +29,6 @@ export default function OrderDisplay({salesOrderNumber, environment}) {
       setSalesOrderData(salesOrder);
     }
   }, [salesOrder]);
-
-  console.log("ORderDisplay salesOrder", salesOrder)
-
 
   if (error) {
     return <p>Failed to load.</p>;
