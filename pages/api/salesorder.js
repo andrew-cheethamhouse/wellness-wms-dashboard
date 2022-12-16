@@ -121,5 +121,7 @@ export default async function handler(req, res) {
       res.status(200);
       res.json(salesOrder);
     }
+  } else {
+    res.status(204);
   }
 }
