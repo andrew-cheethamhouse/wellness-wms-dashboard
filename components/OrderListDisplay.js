@@ -34,7 +34,7 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
   }, [salesOrderList]);
 
   if (!salesOrderList || salesOrderList.length == 0) {
-    return  <div className="px-4 pt-4 rounded-lg sm:px-6 lg:px-8 bg-black border-2 border-white">
+    return  <div className="p-4 rounded-lg sm:px-6 lg:px-8 bg-black border-2 border-white">
     <div className="sm:flex sm:items-center">
       <div className="sm:flex-auto">
         <h1 className="text-xl font-semibold text-white">Loading orders...</h1>
