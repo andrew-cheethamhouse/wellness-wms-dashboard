@@ -68,10 +68,7 @@ export default async function handler(req, res) {
         }
         return "";
     } catch (Error) {
-        setTimeout(function () {
-            console.log("Waiting...")
-            getSalesIDByOrderNumber(orderNumber, fullList);
-        }, 60000);
+        
     }
   }
 
@@ -86,10 +83,7 @@ export default async function handler(req, res) {
       const salesData = response.ID ? response : [];
       return salesData;
     } catch (Error) {
-      setTimeout(function () {
-        console.log("Waiting...")
-        getSalesOrder(salesOrderId);
-      }, 60000);
+      
     }
   }
 

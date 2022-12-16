@@ -3,7 +3,7 @@ import useSWR from "swr";
 import axios from "axios";
 import OrderListNotFound from "./OrderListNotFound";
 
-const salesOrderNumber = "";
+const salesOrderNumber = null;
 const fetcher = (url, salesOrderNumber, environment, getList) =>
   axios
     .get(url, {
