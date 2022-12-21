@@ -14,6 +14,12 @@ const fetcher = (url, salesOrderNumber, environment, getList) => (
   }).then((res) => res.data)
 )
 
+const dateFormat = (date) => {
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  var dateObj  = new Date(date);
+  return dateObj.toLocaleDateString("en-GB", options)
+}
+
 export default function OrderDisplay({salesOrderNumber, environment}) {
   const [salesOrderId, setSalesOrderId] = useState();
   const [salesOrderData, setSalesOrderData] = useState();
@@ -51,7 +57,7 @@ export default function OrderDisplay({salesOrderNumber, environment}) {
       <div className="grid grid-cols-2">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 uppercase">{salesOrder.Customer}</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">{salesOrder.Order.SaleOrderNumber}</p>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">{salesOrder.Order.SaleOrderNumber} ({dateFormat(salesOrder.SaleOrderDate)})</p>
       </div>
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-normal leading-6 text-right text-gray-900 uppercase">ORDER STATUS: <span className="font-medium">{salesOrder.Order.Status}</span></h3>

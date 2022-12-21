@@ -51,7 +51,8 @@ export default async function handler(req, res) {
             typeof response.SaleList !== undefined &&
             response.SaleList.length > 0
         ) {
-        const salesOrders = fullList == "true" ? response.SaleList.filter((sale) => {
+          const sortedResponse = response.SaleList.sort((a,b) => (new Date(a.OrderDate) < new Date(b.OrderDate) ? 1 : -1))
+        const salesOrders = fullList == "true" ? sortedResponse.filter((sale) => {
             return sale.CombinedPickingStatus == "PICKED" && sale.Status !== "VOIDED";
         }) : response.SaleList;
 
