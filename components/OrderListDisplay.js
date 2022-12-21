@@ -32,7 +32,7 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
     (url, id, env) => fetcher(url, id, env, true),
     { 
       errorRetryCount: 3,
-      refreshInterval: 61000 
+      refreshInterval: 61000,
     }
   );
 
@@ -46,7 +46,7 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
     return  <div className="p-4 rounded-lg sm:px-6 lg:px-8 bg-black border-2 border-white">
     <div className="sm:flex sm:items-center">
       <div className="sm:flex-auto">
-        <h1 className="text-xl font-semibold text-white">Loading orders...</h1>
+        <h1 className="text-xl font-semibold text-white">Waiting for picked orders...</h1>
       </div>
     </div>
     </div>;

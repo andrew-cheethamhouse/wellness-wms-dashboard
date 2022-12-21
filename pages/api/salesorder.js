@@ -51,14 +51,13 @@ export default async function handler(req, res) {
             typeof response.SaleList !== undefined &&
             response.SaleList.length > 0
         ) {
-        
-        const salesOrders = Fulllist ? response.SaleList.filter((sale) => {
+        const salesOrders = fullList == "true" ? response.SaleList.filter((sale) => {
             return sale.CombinedPickingStatus == "PICKED" && sale.Status !== "VOIDED";
-        }) : SaleList;
+        }) : response.SaleList;
 
         if (salesOrders.length > 0 && fullList !== "false") {
             const saleOrderIds = salesOrders.map((order) => {
-            return order.SaleID;
+              return order.SaleID;
             });
             return saleOrderIds;
         }
@@ -69,7 +68,7 @@ export default async function handler(req, res) {
         }
         return "";
     } catch (Error) {
-        
+        console.log('Orders not found')
     }
   }
 
@@ -84,15 +83,16 @@ export default async function handler(req, res) {
       const salesData = response.ID ? response : [];
       return salesData;
     } catch (Error) {
-      
+
     }
   }
 
   const { SaleOrderNumber } = req.query;
   let salesOrder = [];
-  if (typeof SaleOrderNumber === undefined && FullList == "false") {
+  if (typeof SaleOrderNumber == 'undefined' && FullList == "false") {
       res.status(200);
       res.json({ ErrorCode: 401, Exception: "Empty search" });
+      return
   }
   if ((typeof SaleOrderNumber !== undefined && SaleOrderNumber !== null && SaleOrderNumber !== "") ||  FullList == "true") {
     if (SaleOrderNumber && SaleOrderNumber.length == 36) {
@@ -103,23 +103,25 @@ export default async function handler(req, res) {
     }
 
     const saleID = await getSalesIDByOrderNumber(SaleOrderNumber, FullList);
-    if (Array.isArray(saleID)) {
-      const orderList = [];
-      for (const id in saleID) {
-        const orderData = await getSalesOrder(saleID[id]);
-        if (orderData && orderData.ID) {
-          orderList.push(orderData);
+    if (saleID) {
+      if (Array.isArray(saleID)) {
+        const orderList = [];
+        for (const id in saleID) {
+          const orderData = await getSalesOrder(saleID[id]);
+          if (orderData && orderData.ID) {
+            orderList.push(orderData);
+          }
         }
+        res.status(200);
+        res.json(orderList);
+        return;
+      } else {
+        salesOrder = await getSalesOrder(saleID);
+        res.status(200);
+        res.json(salesOrder);
       }
-      res.status(200);
-      res.json(orderList);
-      return;
     } else {
-      salesOrder = await getSalesOrder(saleID);
-      res.status(200);
-      res.json(salesOrder);
+      res.status(200).end();
     }
-  } else {
-    res.status(204);
   }
 }

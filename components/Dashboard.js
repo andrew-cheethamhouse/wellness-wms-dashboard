@@ -43,9 +43,14 @@ function classNames(...classes) {
 export default function Dashboard() {
 
   const [salesOrderNumber, setSalesOrderNumber] = useState();
+  const [timer, setTimer] = useState(null)
 
-  function handleSearch(e) {
-    setSalesOrderNumber(e.target.value)
+  const handleSearch = e => {
+    clearTimeout(timer)
+    const newTimer = setTimeout(() => {
+      setSalesOrderNumber(e.target.value)
+    }, 1000)
+    setTimer(newTimer)
   }
 
   function setSalesOrderId(id) {

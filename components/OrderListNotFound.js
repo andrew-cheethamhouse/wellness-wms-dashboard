@@ -4,7 +4,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function OrderListNotFound() {
+export default function OrderListNotFound({message}) {
     const orderIdx = 0
     const order = {}
     return (
@@ -60,7 +60,7 @@ export default function OrderListNotFound() {
                   </tr>
                 </thead>
                 <tr>
-                  <td className='p-4 text-white text-center font-bold' colSpan="5">No orders found</td>
+                  <td className='p-4 text-white text-center font-bold' colSpan="5">{message}</td>
                 </tr>
                   </table>
                 </div>
