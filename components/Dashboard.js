@@ -52,7 +52,7 @@ export default function Dashboard() {
     setSalesOrderNumber(id)
   }
 
-  const [searchEnvironment, setSearchEnvironment] = useState('dev');
+  const [searchEnvironment, setSearchEnvironment] = useState('production');
 
   function toggleSearchEnvironment() {
     setSearchEnvironment(searchEnvironment == "dev" ? "production" : "dev")

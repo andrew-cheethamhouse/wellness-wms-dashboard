@@ -30,7 +30,10 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
   const { data: salesOrderList, error } = useSWR(
     ["/api/salesorder", salesOrderNumber, environment],
     (url, id, env) => fetcher(url, id, env, true),
-    { errorRetryCount: 3 }
+    { 
+      errorRetryCount: 3,
+      refreshInterval: 61000 
+    }
   );
 
   useEffect(() => {
