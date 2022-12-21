@@ -51,9 +51,10 @@ export default async function handler(req, res) {
             typeof response.SaleList !== undefined &&
             response.SaleList.length > 0
         ) {
-        const salesOrders = response.SaleList.filter((sale) => {
+        
+        const salesOrders = Fulllist ? response.SaleList.filter((sale) => {
             return sale.CombinedPickingStatus == "PICKED" && sale.Status !== "VOIDED";
-        });
+        }) : SaleList;
 
         if (salesOrders.length > 0 && fullList !== "false") {
             const saleOrderIds = salesOrders.map((order) => {
