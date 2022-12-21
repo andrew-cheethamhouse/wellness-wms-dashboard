@@ -19,6 +19,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+function hasNotes(order) {
+  if (order.ShippingNotes !== null) {
+    return <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-0.5 text-sm font-medium text-green-800">Has notes</span>
+  }
+}
+
 export default function OrderListDisplay({ environment, setSalesOrderId }) {
   const [salesOrderListData, setSalesOrderListData] = useState();
   const { data: salesOrderList, error } = useSWR(
@@ -122,7 +128,7 @@ export default function OrderListDisplay({ environment, setSalesOrderId }) {
                           "whitespace-nowrap px-3 py-4 text-sm text-gray-500 hidden sm:table-cell"
                         )}
                       >
-                        {order.Customer}
+                        {order.Customer} {hasNotes(order)}
                       </td>
                       <td
                         className={classNames(

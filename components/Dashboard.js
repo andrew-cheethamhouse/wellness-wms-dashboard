@@ -115,7 +115,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </div>
-                    <Switch.Group as="div" className="flex items-center">
+                    {/* <Switch.Group as="div" className="flex items-center">
                       <Switch
                         checked={searchEnvironment == "dev"}
                         onChange={toggleSearchEnvironment}
@@ -136,7 +136,7 @@ export default function Dashboard() {
                         <span className="text-sm font-medium text-gray-900">Environment </span>
                         <span className="text-sm text-gray-500 capitalize">({searchEnvironment} Enabled)</span>
                       </Switch.Label>
-                    </Switch.Group>
+                    </Switch.Group> */}
                   </div>
                 </div>
 

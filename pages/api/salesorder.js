@@ -52,7 +52,7 @@ export default async function handler(req, res) {
             response.SaleList.length > 0
         ) {
         const salesOrders = response.SaleList.filter((sale) => {
-            return sale.CombinedPickingStatus == "PICKED";
+            return sale.CombinedPickingStatus == "PICKED" && sale.Status !== "VOIDED";
         });
 
         if (salesOrders.length > 0 && fullList !== "false") {
