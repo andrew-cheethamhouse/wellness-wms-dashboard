@@ -20,7 +20,7 @@ function classNames(...classes) {
 }
 
 function hasNotes(order) {
-  if (order.ShippingNotes !== null) {
+  if (order.ShippingNotes && order.ShippingNotes.length > 0 || (order.Note && order.Note.length > 0 && order.Note.indexOf("Attn:") !== 0)) {
     return <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-0.5 text-sm font-medium text-green-800">Has notes</span>
   }
 }

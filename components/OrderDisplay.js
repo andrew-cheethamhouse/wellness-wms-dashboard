@@ -20,6 +20,21 @@ const dateFormat = (date) => {
   return dateObj.toLocaleDateString("en-GB", options)
 }
 
+function formatNotes(order) {
+  let note = ""
+  let orderNotePresent = false
+  if (order.Note && order.Note.length > 0 && order.Note.indexOf("Attn:") !== 0) {
+    orderNotePresent = true
+    note += order.Note
+  }
+
+  if (order.ShippingNotes && order.ShippingNotes.length > 0) {
+    note += orderNotePresent ? " - ": "" + order.ShippingNotes
+  }
+
+  return note
+}
+
 export default function OrderDisplay({salesOrderNumber, environment}) {
   const [salesOrderId, setSalesOrderId] = useState();
   const [salesOrderData, setSalesOrderData] = useState();
@@ -91,10 +106,10 @@ export default function OrderDisplay({salesOrderNumber, environment}) {
             <dt className="text-sm font-medium text-gray-500">Contact</dt>
             <dd className="mt-1 text-sm text-gray-900 capitalize">{salesOrderData.Contact}</dd>
           </div>
-          {salesOrderData.ShippingNotes ? <div className="sm:col-span-2">
+          {formatNotes(salesOrderData).length > 0 ? <div className="sm:col-span-2">
             <dt className="text-sm font-medium text-gray-500">Notes</dt>
             <dd className="mt-1 text-sm text-gray-900">
-              {salesOrderData.ShippingNotes}
+              {formatNotes(salesOrderData)}
             </dd>
           </div> : ""}
           
